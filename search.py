@@ -1,10 +1,16 @@
 def search_text(text, query):
-    paragraphs = text.split("\n\n")
+    lines = text.split("\n")
 
     query = query.lower()
 
-    for paragraph in paragraphs:
-        if query in paragraph.lower():
-            return paragraph
+    for i, line in enumerate(lines):
+        if query in line.lower():
+
+            start = max(0, i - 3)
+            end = min(len(lines), i + 4)
+
+            context = "\n".join(lines[start:end])
+
+            return context
 
     return "No relevant information found."
