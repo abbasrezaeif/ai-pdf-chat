@@ -3,8 +3,20 @@ def search_text(text, query):
 
     query = query.lower()
 
+    results = []
+
     for paragraph in paragraphs:
         if query in paragraph.lower():
-            return paragraph.strip()
+            results.append(paragraph.strip())
 
-    return "No relevant information found."
+    if not results:
+        return "No relevant information found."
+
+    output = ""
+
+    for index, result in enumerate(results, start=1):
+        output += f"\n========== Result {index} ==========\n"
+        output += result
+        output += "\n"
+
+    return output
